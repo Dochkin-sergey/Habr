@@ -9,6 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -55,6 +58,18 @@ public class MainPageTest {
         Management.click();
 
         assertTrue(driver.findElement(By.xpath("//*[contains(text(), 'Читают сейчас')]")).isDisplayed());
+    }
 
+    @DisplayName("expectation")
+    @Test
+    public void visible() {
+        driver.get("https://demoqa.com/dynamic-properties");
+        By button = By. cssSelector("#visibleAfter");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
+
+        wait.until(ExpectedConditions.elementToBeClickable(button));
+        WebElement buttonn = driver.findElement(By.cssSelector("#visibleAfter"));
+
+        assertTrue(buttonn.isEnabled());
     }
 }
